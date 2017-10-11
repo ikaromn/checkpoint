@@ -8,15 +8,15 @@
         <title>Site com Bootstrap</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
         <style>
             
         </style>
     </head>
     <body>
         <?php 
-            include 'head-content.php';
+            include '../head-content.php';
         ?>
         <div class="container">
             <div class="col-md-12">

@@ -4,7 +4,7 @@
     $login = $_POST['user'];
     $password = $_POST['password'];
 
-    include "conect.php";
+    include "Connection.php";
     $sql = "INSERT INTO usuarios (nome, nomeempresa, username, password) VALUES ('".$nome."','".$nomeEmpresa."','".$login."','".password_hash($password, PASSWORD_DEFAULT)."')";
     $conn = Conexao::getInstance()->prepare($sql);
     //Verifica se a variável está vazia

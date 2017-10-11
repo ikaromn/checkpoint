@@ -16,10 +16,10 @@
             $(document).ready(function(){
                 $('.submit-login').click(function(){
                     $('.loader').show();
-                    $.post('valida.php', $('#MyForm :input').serializeArray(), function(data){
+                    $.post('logic/valida.php', $('#MyForm :input').serializeArray(), function(data){
                         if(data == 1){
                             $('.loader').hide();
-                            window.location = "logado.php";
+                            window.location = "logic/logado.php";
                         }else{
                             $('.loader').hide();
                             $(".mensagem-erro").html(data);
@@ -27,7 +27,7 @@
                     });
                 });
                 $('.submit-cadastro').click(function(){
-                    $.post('cadastro.php', $('.MyForm :input').serializeArray(), function(data){
+                    $.post('logic/cadastro.php', $('.MyForm :input').serializeArray(), function(data){
                         if(data == 1){
                             $(".mensagem-de-sucesso").html("Cadastro efetuado com sucesso, faça seu login para iniciar a sessão.");
                         }else{

@@ -1,11 +1,11 @@
 <?php
     session_start();
-    include "conect.php";
+    include "Connection.php";
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
     $records = 'SELECT id,nome,nomeempresa,username,password FROM usuarios WHERE username = :username';
-    $conn = Conexao::getInstance()->prepare($records);
+    $conn = Connection::getInstance()->prepare($records);
 	$conn->bindParam(':username', $username);
     $conn->execute();
     $results = $conn->fetch(PDO::FETCH_ASSOC);
