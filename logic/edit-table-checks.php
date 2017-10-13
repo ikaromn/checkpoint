@@ -16,7 +16,7 @@
                 $('#unique').click(function(){
                     var tableValue = $('#tables').val();
                     $('.table-class-select input').val(tableValue);
-                    $.post('consult-values.php', $('#myForm select').serializeArray(), function(data){
+                    $.post('consult-values.php', $('#myForm select, #myForm input[name="userId"]').serializeArray(), function(data){
                         if(data){
                             $(".put-data-here").html(data);
                         }else{
@@ -73,6 +73,8 @@
                             <h2>Nome do funcionário</h2>
                         </div>
                         <form action="consult-values.php" method="post" id="myForm">
+                            <label for="">Selecione um mês e ano:</label>
+                            <input type="hidden" name="userId" value="<?php echo $_SESSION['id']; ?>">
                             <select id="tables" name="tables">
                                 <option></option>
                                 <?php
