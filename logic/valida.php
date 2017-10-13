@@ -8,13 +8,14 @@
 
     $results = $user->verificaUsuario($username, $password);
     //Verify if password is true inside of the database
-    if(count($results) > 0 && password_verify($password, $results['password'])){
+
+    if($results){
     	//Create session cookie if this condition is true
         echo 1;
-        $_SESSION['id'] = $results['id'];
-        $_SESSION['username'] = $results['username'];
-        $_SESSION['nome'] = $results['nome'];
-        $_SESSION['nomeempresa'] = $results['nomeempresa'];
+        $_SESSION['id'] = $user->getId();
+        $_SESSION['username'] = $user->getUsername();
+        $_SESSION['nome'] = $user->getNome();
+        $_SESSION['nomeempresa'] = $user->getNomeEmpresa();
     }else{
         echo "Login invalido";
     }

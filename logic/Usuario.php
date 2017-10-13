@@ -1,7 +1,8 @@
 <?php
     include "Connection.php";
     class Usuario
-    {
+    {   
+        protected $id;
         protected $nome;
         protected $username;
         protected $nomeempresa;
@@ -29,7 +30,28 @@
             $query->bindParam(':username', $u);
             $query->execute();
 
-            return $query->fetch(PDO::FETCH_ASSOC);
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+            if(count($result) > 0 && password_verify($p, $result['password'])){
+                $this->id = $result['id'];
+                $this->nome = $result['nome'];
+                $this->username = $result['username'];
+                $this->nomeempresa = $result['nomeempresa'];
+                return 1;
+            }else{
+                return 0;
+            }
+        }
 
+        public function getId(){
+            return $this->id;
+        }
+        public function getNome(){
+            return $this->nome;
+        }
+        public function getNomeEmpresa(){
+            return $this->nomeEmpresa;
+        }
+        public function getUsername(){
+            return $this->username;
         }
     }
