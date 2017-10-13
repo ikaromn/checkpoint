@@ -15,7 +15,7 @@
                     </div>
                     <div class='col-md-6'>
                         <div class='col-md-2 logout-right'>
-                            <form action=logout.php method=get>
+                            <form action=../logout.php method=get>
                                 <button type=submit>
                                     <span class='glyphicon glyphicon-log-out' alt='Sair'></span>
                                 </button>

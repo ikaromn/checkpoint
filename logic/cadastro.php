@@ -4,14 +4,14 @@
     $login = $_POST['user'];
     $password = $_POST['password'];
 
-    include "Connection.php";
-    $sql = "INSERT INTO usuarios (nome, nomeempresa, username, password) VALUES ('".$nome."','".$nomeEmpresa."','".$login."','".password_hash($password, PASSWORD_DEFAULT)."')";
-    $conn = Connection::getInstance()->prepare($sql);
-    //Verifica se a variável está vazia
+    include 'Usuario.php';
+    $nUser = new Usuario();
+
     if($nome == null or $nomeEmpresa == null or $login == null or $password == null){
         echo "Verifique se todos os campos foram preenchidos e tente novamente.";
     }else{
-        if($conn->execute()){
+        $nUser = $nUser->cadastroUsuario($nome, $login, $nomeEmpresa, $password);
+        if($nUser){
             echo 1;
         }else{
             echo "n foi";
