@@ -6,7 +6,7 @@
 
     include "Connection.php";
     $sql = "INSERT INTO usuarios (nome, nomeempresa, username, password) VALUES ('".$nome."','".$nomeEmpresa."','".$login."','".password_hash($password, PASSWORD_DEFAULT)."')";
-    $conn = Conexao::getInstance()->prepare($sql);
+    $conn = Connection::getInstance()->prepare($sql);
     //Verifica se a variável está vazia
     if($nome == null or $nomeEmpresa == null or $login == null or $password == null){
         echo "Verifique se todos os campos foram preenchidos e tente novamente.";
