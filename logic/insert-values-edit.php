@@ -3,7 +3,7 @@
     ini_set('display_startup_erros',1);
     error_reporting(E_ALL);
     session_start();
-    include "Connection.php";
+    include "Points.php";
 
     $userId = $_SESSION['id'];
     $month = $_POST['monthSelect'];
@@ -12,11 +12,13 @@
     $secondTime = $_POST['time2'];
     $thirdTime = $_POST['time3'];
     $fourthTime = $_POST['time4'];
-    $sql = "UPDATE `".$month."` SET entrada1 = '".$firstTime."', `saida1` = '".$secondTime."', `entrada2` = '".$thirdTime."', `saida2` = '".$fourthTime."' WHERE `dia` = ".$day ." and `userId` = " . $userId;
-    $conn = Connection::getInstance()->prepare($sql);
-    if($conn->execute()){
+
+    $edit = new Points($userId, $month, $day, $firstTime, $secondTime, $thirdTime, $fourthTime);
+    $tryEdit = $edit->editTime();
+
+    if($tryEdit){
         echo "Edição concluída com sucesso. Atualize a página e verifique na tabela a nova alteração.";
     }else{
-        $results = $conn->fetch(PDO::FETCH_ASSOC);
+        echo $tryEdit;
     }
 ?>

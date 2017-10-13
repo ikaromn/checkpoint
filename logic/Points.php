@@ -63,6 +63,30 @@
             }
             return false;
         }
+        public function editTime()
+        {
+            $conn = new Connection();
+            $conn = $conn->getInstance();
+
+            $sql = "UPDATE `".$this->getMonth()."` SET
+                        `entrada1` = :entrada1,
+                        `saida1` = :saida1,
+                        `entrada2` = :entrada2,
+                        `saida2` = :saida2 WHERE `dia` = :dia and `userId` = :userId";
+            $tryQuery = $conn->prepare($sql);
+            $tryQuery->bindValue(':entrada1', $this->getTimeOne());
+            $tryQuery->bindValue(':saida1', $this->getTimeTwo());
+            $tryQuery->bindValue(':entrada2', $this->getTimeThree());
+            $tryQuery->bindValue(':saida2', $this->getTimeFour());
+            $tryQuery->bindValue(':dia', $this->getDay());
+            $tryQuery->bindValue(':userId', $this->getUserId());
+
+            if($tryQuery->execute())
+            {
+                return true;
+            }
+            return false;
+        }
 
 
         //Setters
