@@ -11,6 +11,7 @@
         public function cadastroUsuario($n, $u, $nE, $p){
             $conn = new Connection();
             $conn = $conn->getInstance();
+
             $queryCadastro = "INSERT INTO usuarios (nome, nomeempresa, username, password) VALUES ('".$n."','".$nE."','".$u."','".password_hash($p, PASSWORD_DEFAULT)."')";
             $query = $conn->prepare($queryCadastro);
             
@@ -32,16 +33,16 @@
 
             $result = $query->fetch(PDO::FETCH_ASSOC);
             if(count($result) > 0 && password_verify($p, $result['password'])){
-                $this->id = $result['id'];
-                $this->nome = $result['nome'];
-                $this->username = $result['username'];
-                $this->nomeempresa = $result['nomeempresa'];
-                return 1;
-            }else{
-                return 0;
+                $this->setId($result['id']);
+                $this->setNome($result['nome']);
+                $this->setUsername($result['username']);
+                $this->setNomeEmpresa($result['nomeempresa']);
+                return true;
             }
+            return false;
         }
 
+        //Getters
         public function getId(){
             return $this->id;
         }
@@ -53,5 +54,19 @@
         }
         public function getUsername(){
             return $this->username;
+        }
+
+        //Setters
+        public function setId($i){
+            $this->id = $i;
+        }
+        public function setNome($n){
+            $this->nome = $n;
+        }
+        public function setNomeEmpresa($n){
+            $this->nomeEmpresa = $n;
+        }
+        public function setUsername($u){
+            $this->username = $u;
         }
     }
