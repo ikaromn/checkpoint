@@ -26,7 +26,7 @@
                     }else{
                         console.log('foi aqui');
                         $.post('input-values-new-tables-point.php', $('#myForm :input').serializeArray(), function(data){
-                            if(data == 1 + " " + 1){
+                            if(data == 1){
                                 $(".mensagem-de-sucesso").html("Cadastro efetuado com sucesso. Volte para o <a href='logado.php'>painel de controle</a> para começar sua consulta ou adicionar novos valores em seu espelho de ponto");
                             }else{
                                 $(".mensagem-erro").html(data);
