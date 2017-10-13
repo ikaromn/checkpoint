@@ -19,4 +19,17 @@
                 return false;
             }
         }
+
+        public function verificaUsuario($u, $p){
+            $conn = new Connection();
+            $conn = $conn->getInstance();
+
+            $queryValida = 'SELECT id,nome,nomeempresa,username,password FROM usuarios WHERE username = :username';
+            $query = $conn->prepare($queryValida);
+            $query->bindParam(':username', $u);
+            $query->execute();
+
+            return $query->fetch(PDO::FETCH_ASSOC);
+
+        }
     }

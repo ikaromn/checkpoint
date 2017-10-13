@@ -1,14 +1,12 @@
 <?php
     session_start();
-    include "Connection.php";
+    include "Usuario.php";
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    $records = 'SELECT id,nome,nomeempresa,username,password FROM usuarios WHERE username = :username';
-    $conn = Connection::getInstance()->prepare($records);
-	$conn->bindParam(':username', $username);
-    $conn->execute();
-    $results = $conn->fetch(PDO::FETCH_ASSOC);
+    $user = new Usuario();
+
+    $results = $user->verificaUsuario($username, $password);
     //Verify if password is true inside of the database
     if(count($results) > 0 && password_verify($password, $results['password'])){
     	//Create session cookie if this condition is true
