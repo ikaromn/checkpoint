@@ -88,11 +88,11 @@
                                     $countArmazene = count($armazene);
                                     $value = 0;
                                     for ($i=0; $i < $countArmazene; $i++) {
-                                        $posicao = strpos($armazene[$i], $idName);
-                                        if($posicao === 0){
+                                        //$posicao = strpos($armazene[$i], $idName);
+                                        //if($posicao === 0){
                                             echo "<option value='{$armazene[$i]}'>{$armazene[$i]}</option>";
                                             $value++;
-                                        }
+                                        //}
                                     }
                                 ?>
                             </select>
