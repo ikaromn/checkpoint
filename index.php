@@ -46,28 +46,21 @@
     </head>
     <body>
         <header>
-            <div class="container jumbotron">
-                <div class="col-md-12">
-                    <div class="col-md-2">
-                        <h1>Checkpoint</h1>
-                    </div>
-                    <div class="col-md-2">
-                        
-                    </div>
-                    <div class="col-md-2">
-                        
-                    </div>
-                    <div class="col-md-4">
-                        <form action="" method="post" id="MyForm">
-                            <div class="loader" style="display: none;">
-                                <img src="loader.gif" alt="Carregando" class="lazy" intemprop="image">
-                            </div>
-                            <div class="mensagem-erro"></div>
-                            <label>Username  :</label><input id="username" type="text" name="username" class="box"/><br /><br />
-                            <label>Password  :</label><input id="password" type="password" name="password" class="box" /><br/><br />
-                            <input type="submit" name='submit' value="Submit" class='submit-login'/><br />
-                        </form>
-                    </div>
+            <div class="col-md-12 container header-principal">
+                <div class="logo-checkpoint">
+                    <h1>Checkpoint</h1>
+                </div>
+
+                <div class="login-form">
+                    <form action="" method="post" id="MyForm">
+                        <div class="loader" style="display: none;">
+                            <img src="loader.gif" alt="Carregando" class="lazy" intemprop="image">
+                        </div>
+                        <div class="mensagem-erro"></div>
+                        <label>Username  :</label><input id="username" type="text" name="username" class="box"/><br /><br />
+                        <label>Password  :</label><input id="password" type="password" name="password" class="box" /><br/><br />
+                        <input type="submit" name='submit' value="Submit" class='submit-login'/><br />
+                    </form>
                 </div>
             </div>
         </header>

@@ -1,0 +1,14 @@
+.header-principal{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 180px;
+    background-color: #e4e4e4;
+    margin-bottom: 25px;
+}
+.logo-checkpoint{
+    float: left;
+}
+.login-form{
+    float: right;
+}
