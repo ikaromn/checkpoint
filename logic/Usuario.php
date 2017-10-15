@@ -13,9 +13,11 @@
             $conn = new Connection();
             $conn = $conn->getInstance();
 
-            $queryCadastro = "INSERT INTO usuarios (nome, nomeempresa, username, password) VALUES (:nome,'".$nE."','".$u."','".password_hash($p, PASSWORD_DEFAULT)."')";
+            $queryCadastro = "INSERT INTO usuarios (nome, nomeempresa, username, password) VALUES (:nome, :nomeempresa, :username,'".password_hash($p, PASSWORD_DEFAULT)."')";
             $query = $conn->prepare($queryCadastro);
             $query->bindParam(":nome", $n);
+            $query->bindParam(":nomeempresa", $nE);
+            $query->bindParam(":username", $u);
             if($query->execute()){
                 return true;
             } else {
