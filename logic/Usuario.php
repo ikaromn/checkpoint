@@ -18,14 +18,15 @@
             $query->bindParam(":nome", $n);
             $query->bindParam(":nomeempresa", $nE);
             $query->bindParam(":username", $u);
-            if($query->execute()){
+            if ($query->execute()) {
                 return true;
             } else {
                 return false;
             }
         }
 
-        public function verificaUsuario($u, $p){
+        public function verificaUsuario($u, $p)
+        {
             $conn = new Connection();
             $conn = $conn->getInstance();
 
@@ -35,7 +36,7 @@
             $query->execute();
 
             $result = $query->fetch(PDO::FETCH_ASSOC);
-            if(count($result) > 0 && password_verify($p, $result['password'])){
+            if (count($result) > 0 && password_verify($p, $result['password'])) {
                 $this->setId($result['id']);
                 $this->setNome($result['nome']);
                 $this->setUsername($result['username']);

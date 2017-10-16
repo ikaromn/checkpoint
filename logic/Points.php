@@ -33,11 +33,11 @@
             $conn = $conn->getInstance();
 
             $tryQuery = $conn->prepare($createTable);
-            if($tryQuery->execute())
-            {
+            if ($tryQuery->execute()) {
                 return $this->newTime($m, $d, $t1, $t2, $t3, $t4);
             }
         }
+
         public function newTime($m, $d, $t1, $t2, $t3, $t4)
         {
             $sql = "INSERT INTO `" . $m ."`(userId, dia, entrada1, saida1, entrada2, saida2) VALUES
@@ -52,8 +52,7 @@
             $tryQuery->bindValue(':entrada2', $t3);
             $tryQuery->bindValue(':saida2', $t4);
             try{
-                if($tryQuery->execute())
-                {
+                if ($tryQuery->execute()) {
                     return true;
                 }
             }
@@ -80,14 +79,14 @@
             $tryQuery->bindValue(':dia', $d);
             $tryQuery->bindValue(':userId', $this->getUserId());
 
-            if($tryQuery->execute())
-            {
+            if ($tryQuery->execute()) {
                 return true;
             }
             return false;
         }
 
-        public function listPoints($m){
+        public function listPoints($m)
+        {
             $sql = "SELECT `dia`,`entrada1`,`saida1`,`entrada2`,`saida2` FROM `".$m."` WHERE `userId` = :userId ORDER BY `dia`"; 
             $conn = new Connection();
             $conn = $conn->getInstance();
