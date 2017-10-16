@@ -14,6 +14,9 @@
         <script>
             $(document).ready(function(){
                 $('#unique').click(function(){
+                    if($('#myForm input[name="tables"]').val() == ''){
+                        return false;
+                    }
                     var tableValue = $('#myForm input[name=tables]').val();
                     $('#table-name').val(tableValue);
                     $.post('consult-values.php', $('#myForm :input').serializeArray(), function(data){
@@ -32,6 +35,9 @@
                     });
                 });
                 $('#sendValues').click(function(){
+                    if($('#time1').val() == '' || $('#time2').val() == '' || $('#time3').val() == '' || $('#time4').val() == ''){
+                        return false;
+                    }
                     $.post('insert-values-edit.php', $('#edit-values select, #edit-values :input ').serializeArray(), function(data){
                         if(data){
                             $(".concluida").html(data);
