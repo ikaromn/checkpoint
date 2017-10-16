@@ -14,8 +14,8 @@
         <script>
             $(document).ready(function(){
                 $('#unique').click(function(){
-                    var tableValue = $('#tables').val();
-                    $('.table-class-select input').val(tableValue);
+                    var tableValue = $('#myForm input[name=tables]').val();
+                    $('#table-name').val(tableValue);
                     $.post('consult-values.php', $('#myForm :input').serializeArray(), function(data){
                         if(data){
                             $(".put-data-here").html(data);
@@ -32,7 +32,7 @@
                     });
                 });
                 $('#sendValues').click(function(){
-                    $.post('insert-values-edit.php', $('#edit-values select, #edit-values :input, #edit-values table-class-select').serializeArray(), function(data){
+                    $.post('insert-values-edit.php', $('#edit-values select, #edit-values :input ').serializeArray(), function(data){
                         if(data){
                             $(".concluida").html(data);
                         }else{
@@ -93,9 +93,9 @@
 
                                 </tbody>
                             </table>
-                            <form action="insert-values-edit.php" method="post" class="form-inline" id="edit-values">
+                            <form action="" method="post" class="form-inline" id="edit-values">
                                 <div class="col-md-12 table-class-select">
-                                    <input name="monthSelect" type="hidden" value="">
+                                    <input id="table-name" name="monthSelect" type="hidden" value="">
                                 </div>
                                 <div class="col-md-12 dia-row-value">
                                     <p>Selecione o dia para editar:</p>
