@@ -13,7 +13,7 @@
     foreach ($r as $key ){
         echo "<tr>";
         for($i=0;$i<5;$i++){
-            echo "<td><p>{$key[$i]}</p><td>";
+            echo "<td><p>{$key[$i]}</p></td>";
         }
         echo "</tr>";
     }

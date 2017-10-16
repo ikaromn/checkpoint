@@ -58,9 +58,6 @@
             .form-inline input {
                 width: 10%;
             }
-            tr td:nth-child(2), tr td:nth-child(4), tr td:nth-child(6), tr td:nth-child(8), tr td:nth-child(10){
-                display: none;
-            }
             .hide-list{
                 display: none;
             }
