@@ -92,8 +92,19 @@
             $conn = $conn->getInstance();
             $tryQuery = $conn->prepare($sql);
             $tryQuery->bindValue(':userId', $this->getUserId());
-            if($tryQuery->execute()){
-                return $tryQuery;
+            try{
+                if($tryQuery->execute()){
+                    return $tryQuery;
+                }
+            }
+            catch(PDOException $e){
+                $error = $e->getMessage();
+                if (preg_match("/doesn't exist/", $error)) {
+                    echo "<br>Essa tabela não existe.";
+                    die;
+                } else {
+                    echo $error;
+                }
             }
             return false;
         }

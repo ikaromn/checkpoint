@@ -75,7 +75,7 @@
                         <form action="consult-values.php" method="post" id="myForm">
                             <label for="">Digite o mês e ano desejado: </label>
                             <input type="hidden" name="userId" value="<?php echo $_SESSION['id']; ?>">
-                            <input type="text" name="tables" placeholder="mm/aaaa" />
+                            <input type="text" name="tables" placeholder="mm/aaaa" required />
                             <input type="submit" id="unique" />
                         </form>
                         <div class="panel-body">
