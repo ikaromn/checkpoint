@@ -2,6 +2,9 @@
     session_start();
     include "Points.php";
     $table = $_POST['tables'];
+    if($table[0] == 0){
+        $table = substr($table, 1);
+    }
     $userId = $_SESSION['id'];
 
     $p = new Points($userId);

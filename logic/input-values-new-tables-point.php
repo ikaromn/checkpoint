@@ -5,6 +5,9 @@
 
     $userId = $_SESSION['id'];
     $month = $_POST['dateMonth'];
+    if($month[0] == 0){
+        $month = substr($month, 1);
+    }
     $day = $_POST['day'];
     $firstTime = $_POST['time1'];
     $secondTime = $_POST['time2'];
