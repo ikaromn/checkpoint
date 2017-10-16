@@ -16,14 +16,14 @@
                 $('#unique').click(function(){
                     var tableValue = $('#tables').val();
                     $('.table-class-select input').val(tableValue);
-                    $.post('consult-values.php', $('#myForm select, #myForm input[name="userId"]').serializeArray(), function(data){
+                    $.post('consult-values.php', $('#myForm :input').serializeArray(), function(data){
                         if(data){
                             $(".put-data-here").html(data);
                         }else{
                             $(".mensagem-erro").html(data);
                         }
                     });
-                    $.post('consult-day-values.php', $('#myForm select').serializeArray(), function(data){
+                    $.post('consult-day-values.php', $('#myForm :input').serializeArray(), function(data){
                         if(data){
                             $(".dia-row-value select").html(data);
                         }else{
@@ -73,31 +73,9 @@
                             <h2>Nome do funcionário</h2>
                         </div>
                         <form action="consult-values.php" method="post" id="myForm">
-                            <label for="">Selecione um mês e ano:</label>
+                            <label for="">Digite o mês e ano desejado: </label>
                             <input type="hidden" name="userId" value="<?php echo $_SESSION['id']; ?>">
-                            <select id="tables" name="tables">
-                                <option></option>
-                                <?php
-                                    include "Connection.php";
-                                    $sql = "show tables;";
-                                    $conn = Connection::getInstance()->prepare($sql);
-                                    $conn->execute();
-                                    $armazene = [];
-                                    $idName = $_SESSION['id'];
-                                    foreach($conn as $row){
-                                        $armazene[] = $row[0];
-                                    }
-                                    $countArmazene = count($armazene);
-                                    $value = 0;
-                                    for ($i=0; $i < $countArmazene; $i++) {
-                                        //$posicao = strpos($armazene[$i], $idName);
-                                        //if($posicao === 0){
-                                            echo "<option value='{$armazene[$i]}'>{$armazene[$i]}</option>";
-                                            $value++;
-                                        //}
-                                    }
-                                ?>
-                            </select>
+                            <input type="text" name="tables" placeholder="mm/aaaa" />
                             <input type="submit" id="unique" />
                         </form>
                         <div class="panel-body">
@@ -117,7 +95,7 @@
                             </table>
                             <form action="insert-values-edit.php" method="post" class="form-inline" id="edit-values">
                                 <div class="col-md-12 table-class-select">
-                                    <input name="monthSelect">
+                                    <input name="monthSelect" type="hidden" value="">
                                 </div>
                                 <div class="col-md-12 dia-row-value">
                                     <p>Selecione o dia para editar:</p>

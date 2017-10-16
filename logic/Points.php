@@ -11,27 +11,22 @@
         protected $timeFour;
         protected $userId;
 
-        public function __construct($u, $m, $d, $t1, $t2, $t3, $t4)
+        public function __construct($u)
         {
             $this->userId = $u;
-            $this->month = $m;
-            $this->day = $d;
-            $this->timeOne = $t1;
-            $this->timeTwo = $t2;
-            $this->timeThree = $t3;
-            $this->timeFour = $t4;
         }
 
-        public function newMonthTime()
+        public function newMonthTime($m, $d, $t1, $t2, $t3, $t4)
         {
-            $createTable = "CREATE TABLE IF NOT EXISTS `".$this->getMonth()."`(
+            $createTable = "CREATE TABLE IF NOT EXISTS `".$m."`(
                                 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
                                 userId int NOT NULL,
                                 dia int NOT NULL,
                                 entrada1 varchar(5) NOT NULL,
                                 saida1 varchar(5) NOT NULL,
                                 entrada2 varchar(5) NOT NULL,
-                                saida2 varchar(5) NOT NULL
+                                saida2 varchar(5) NOT NULL,
+                                UNIQUE KEY `unique_index` (`userId`, `dia`)
                                 )";
             
             $conn = new Connection();
@@ -40,45 +35,49 @@
             $tryQuery = $conn->prepare($createTable);
             if($tryQuery->execute())
             {
-                return $this->newTime();
+                return $this->newTime($m, $d, $t1, $t2, $t3, $t4);
             }
         }
-        public function newTime()
+        public function newTime($m, $d, $t1, $t2, $t3, $t4)
         {
-            $sql = "INSERT INTO `" . $this->getMonth() ."`(userId, dia, entrada1, saida1, entrada2, saida2) VALUES
+            $sql = "INSERT INTO `" . $m ."`(userId, dia, entrada1, saida1, entrada2, saida2) VALUES
                                                         (:userId, :dia, :entrada1, :saida1, :entrada2, :saida2)";
             $conn = new Connection();
             $conn = $conn->getInstance();
             $tryQuery = $conn->prepare($sql);
-            $tryQuery->bindValue(':dia', $this->getDay());
+            $tryQuery->bindValue(':dia', $d);
             $tryQuery->bindValue(':userId', $this->getUserId());
-            $tryQuery->bindValue(':entrada1', $this->getTimeOne());
-            $tryQuery->bindValue(':saida1', $this->getTimeTwo());
-            $tryQuery->bindValue(':entrada2', $this->getTimeThree());
-            $tryQuery->bindValue(':saida2', $this->getTimeFour());
-
-            if($tryQuery->execute())
-            {
-                return true;
+            $tryQuery->bindValue(':entrada1', $t1);
+            $tryQuery->bindValue(':saida1', $t2);
+            $tryQuery->bindValue(':entrada2', $t3);
+            $tryQuery->bindValue(':saida2', $t4);
+            try{
+                if($tryQuery->execute())
+                {
+                    return true;
+                }
+            }
+            catch(PDOException $e){
+                echo "Impossivel gravar os dados desejados. Favor verificar se esse dia já existe em <a href='edit-table-checks.php'>consultar dias</a>.";
             }
             return false;
         }
-        public function editTime()
+        public function editTime($m, $d, $t1, $t2, $t3, $t4)
         {
             $conn = new Connection();
             $conn = $conn->getInstance();
 
-            $sql = "UPDATE `".$this->getMonth()."` SET
+            $sql = "UPDATE `".$m."` SET
                         `entrada1` = :entrada1,
                         `saida1` = :saida1,
                         `entrada2` = :entrada2,
                         `saida2` = :saida2 WHERE `dia` = :dia and `userId` = :userId";
             $tryQuery = $conn->prepare($sql);
-            $tryQuery->bindValue(':entrada1', $this->getTimeOne());
-            $tryQuery->bindValue(':saida1', $this->getTimeTwo());
-            $tryQuery->bindValue(':entrada2', $this->getTimeThree());
-            $tryQuery->bindValue(':saida2', $this->getTimeFour());
-            $tryQuery->bindValue(':dia', $this->getDay());
+            $tryQuery->bindValue(':entrada1', $t1);
+            $tryQuery->bindValue(':saida1', $t2);
+            $tryQuery->bindValue(':entrada2', $t3);
+            $tryQuery->bindValue(':saida2', $t4);
+            $tryQuery->bindValue(':dia', $d);
             $tryQuery->bindValue(':userId', $this->getUserId());
 
             if($tryQuery->execute())
@@ -88,6 +87,17 @@
             return false;
         }
 
+        public function listPoints($m){
+            $sql = "SELECT `dia`,`entrada1`,`saida1`,`entrada2`,`saida2` FROM `".$m."` WHERE `userId` = :userId ORDER BY `dia`"; 
+            $conn = new Connection();
+            $conn = $conn->getInstance();
+            $tryQuery = $conn->prepare($sql);
+            $tryQuery->bindValue(':userId', $this->getUserId());
+            if($tryQuery->execute()){
+                return $tryQuery;
+            }
+            return false;
+        }
 
         //Setters
         public function getUserId()

@@ -11,8 +11,8 @@
     $thirdTime = $_POST['time3'];
     $fourthTime = $_POST['time4'];
 
-    $newDate = new Points($userId, $month, $day, $firstTime, $secondTime, $thirdTime, $fourthTime);
-    $tryCreate = $newDate->newMonthTime();
+    $newDate = new Points($userId);
+    $tryCreate = $newDate->newMonthTime($month, $day, $firstTime, $secondTime, $thirdTime, $fourthTime);
     if($tryCreate == 1){
         echo 1;
     }

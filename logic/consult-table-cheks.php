@@ -46,29 +46,7 @@
                             <h2>Nome do funcionário</h2>
                         </div>
                         <form action="consult-values.php" method="post" id="myForm">
-                            <select id="tables" name="tables">
-                                <option></option>
-                                <?php
-                                    include "Connection.php";
-                                    $sql = "show tables;";
-                                    $conn = Connection::getInstance()->prepare($sql);
-                                    $conn->execute();
-                                    $armazene = [];
-                                    $firstName = $_SESSION['id'];
-                                    foreach($conn as $row){
-                                        $armazene[] = $row[0];
-                                    }
-                                    $countArmazene = count($armazene);
-                                    $value = 0;
-                                    for ($i=0; $i < $countArmazene; $i++) {
-                                        $posicao = strpos($armazene[$i], $firstName);
-                                        if($posicao === 0){
-                                            echo "<option value='{$armazene[$i]}'>{$armazene[$i]}</option>";
-                                            $value++;
-                                        }
-                                    }
-                                ?>
-                            </select>
+                            <input type="text" name="tables" />
                             <input type="submit" id="unique" />
                         </form>
                         <div class="panel-body">

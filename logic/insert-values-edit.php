@@ -13,8 +13,8 @@
     $thirdTime = $_POST['time3'];
     $fourthTime = $_POST['time4'];
 
-    $edit = new Points($userId, $month, $day, $firstTime, $secondTime, $thirdTime, $fourthTime);
-    $tryEdit = $edit->editTime();
+    $edit = new Points($userId);
+    $tryEdit = $edit->editTime($month, $day, $firstTime, $secondTime, $thirdTime, $fourthTime);
 
     if($tryEdit){
         echo "Edição concluída com sucesso. Atualize a página e verifique na tabela a nova alteração.";
