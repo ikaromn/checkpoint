@@ -20,9 +20,8 @@
             $query->bindParam(":username", $u);
             if ($query->execute()) {
                 return true;
-            } else {
-                return false;
             }
+            return false;
         }
 
         public function verificaUsuario($u, $p)
