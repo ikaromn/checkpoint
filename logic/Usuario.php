@@ -18,14 +18,15 @@
             $query->bindParam(":nome", $n);
             $query->bindParam(":nomeempresa", $nE);
             $query->bindParam(":username", $u);
-            if($query->execute()){
+            if ($query->execute()) {
                 return true;
             } else {
                 return false;
             }
         }
 
-        public function verificaUsuario($u, $p){
+        public function verificaUsuario($u, $p)
+        {
             $conn = new Connection();
             $conn = $conn->getInstance();
 
@@ -35,7 +36,7 @@
             $query->execute();
 
             $result = $query->fetch(PDO::FETCH_ASSOC);
-            if(count($result) > 0 && password_verify($p, $result['password'])){
+            if (count($result) > 0 && password_verify($p, $result['password'])) {
                 $this->setId($result['id']);
                 $this->setNome($result['nome']);
                 $this->setUsername($result['username']);
@@ -46,30 +47,38 @@
         }
 
         //Getters
-        public function getId(){
+        public function getId()
+        {
             return $this->id;
         }
-        public function getNome(){
+        public function getNome()
+        {
             return $this->nome;
         }
-        public function getNomeEmpresa(){
+        public function getNomeEmpresa()
+        {
             return $this->nomeEmpresa;
         }
-        public function getUsername(){
+        public function getUsername()
+        {
             return $this->username;
         }
 
         //Setters
-        public function setId($i){
+        public function setId($i)
+        {
             $this->id = $i;
         }
-        public function setNome($n){
+        public function setNome($n)
+        {
             $this->nome = $n;
         }
-        public function setNomeEmpresa($n){
+        public function setNomeEmpresa($n)
+        {
             $this->nomeEmpresa = $n;
         }
-        public function setUsername($u){
+        public function setUsername($u)
+        {
             $this->username = $u;
         }
     }
